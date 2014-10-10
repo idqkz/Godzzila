@@ -30,8 +30,8 @@ class User extends AppModel {
 		//	действие
 		$action = 'sendmessage';
 		//	логин и пароль
-		$user_name = 'supernanny';
-		$password = 'W6qifni3F';
+		$user_name = 'interdq';
+		$password = 'n1qMeWmmk';
 			
 		//	формируем запрос на отправку
 		$url = "http://212.124.121.186:9501/api";
@@ -45,15 +45,14 @@ class User extends AppModel {
 		;
 
 		// create a new cURL resource
-		// $ch = curl_init();
+		$ch = curl_init();
 		// set URL and other appropriate options
-		// curl_setopt($ch, CURLOPT_URL, $url . urlencode($query));
-		// curl_setopt($ch, CURLOPT_HEADER, false);
-		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_URL, $url . urlencode($query));
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-		// $response = curl_exec($ch);
-		// $info = curl_getinfo($ch);
-		// curl_close($ch);
+		$response = curl_exec($ch);
+		curl_close($ch);
 			
 		//	подключаем xml
 		App::uses('Xml', 'Utility');
@@ -69,9 +68,9 @@ class User extends AppModel {
 			'message_id' => $message_id
 		);
 		
-		$Sms_message = ClassRegistry::init('Smsmessage');
-		$Sms_message->create();
-		$Sms_message->save($sms_data);
+		// $Sms_message = ClassRegistry::init('Smsmessage');
+		// $Sms_message->create();
+		// $Sms_message->save($sms_data);
 
 		return $sms_data;
 		

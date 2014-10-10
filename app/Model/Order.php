@@ -54,18 +54,23 @@
 
 		public function check_status_change($id_order, $status_order) {
 			$order_info = $this->findById($id_order);
-			$user_id = $order_info['Order']['phone'];
-			$phone = $order_info['Order']['phone'];
 			$old_status_order = $order_info['Order']['status'];
-			$User_model = ClassRegistry::init('User');
 			if (($old_status_order == 1) && ($status_order == 2)){
-				// $User_model->$this->send_sms($user_id, $message_text, $phone);
 				// Отправка сообщения об подтверждении заказа и он приянат в обработку
+				$User_model = ClassRegistry::init('User');
+				$user_id = $order_info['Order']['phone'];
+				$phone = $order_info['Order']['phone'];
+				$message_text = 'Vash zakaz prinyat v obrabotku';
+				$User_model->send_sms($user_id, $message_text, $phone);
 			}
 
 			if (($old_status_order == 2) && ($status_order == 3)){
-				// $this->send_sms($user_id, $message_text, $phone)
 				// Отправка сообщения о том что заказ передан курьеру.
+				$User_model = ClassRegistry::init('User');
+				$user_id = $order_info['Order']['phone'];
+				$phone = $order_info['Order']['phone'];
+				$message_text = 'Vash zakaz otpravlen na dostavku';
+				$User_model->send_sms($user_id, $message_text, $phone);
 			}
 		}
 
